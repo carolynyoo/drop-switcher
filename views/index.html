@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="container-fluid" ng-show="!loading && doneSearching">
+<div class="container-fluid" ng-show="!loading && searching">
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6" id="search-results">
            <div class="list-group row" ng-repeat="track in searchResults | limitTo:8" ng-click="analyzeTrack(track.permalink_url)"> 
@@ -53,12 +53,16 @@
     </div>
 </div> 
 
-<pre ng-show="doneAnalyzing">{{analyzedResults}}</pre>
+<div ng-show="doneAnalyzing">
+<h3 ng-if="analyzedResults && (analyzedResults.track.time_signature!==4 || parseInt(analyzedResults.track.tempo)!==128)">Please pick a more generic EDM song (4/4 time signature)</h3>
+</div>
+
+<!-- <div ng-show="results">{{analyzedResults}}</div> -->
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12" id="footer">
-            <strong id="name">Drop Switcher</strong> was created so you can "be your own DJ" (circa 2015 where popular DJs require no real beatmatch/transition skills..) and switch the drop at the peak of a song to another one. It uses the Echo Nest, Soundcloud, and remix.js APIs. Created for a Fullstack Academy hackathon week by Carolyn Yoo.
+            <strong id="name">Drop Switcher</strong> was created so you can "be your own DJ" (circa 2015) and switch the drop at the peak of a song to another one. Please use generic EDM songs with a 4/4 structure only (and preferably around 128 bpm), no creativity allowed. Drop Switcher uses the Echo Nest, Soundcloud, and remix.js APIs and was created for a Fullstack Academy hackathon week by Carolyn Yoo.
         </div>
     </div>
 </div>
