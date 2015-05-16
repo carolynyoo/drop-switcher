@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link type="text/css" href="public/stylesheets/styles.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=News+Cycle:400,700' rel='stylesheet' type='text/css'>
+    <link type="text/css" href="stylesheets/styles.css" rel="stylesheet" />
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" media="screen">
-    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel='shortcut icon' type='image/png' href='favicon.ico' />
     <title>Drop Switcher</title>
 </head>
 <body ng-App="dropSwitcher">
 <div ng-controller="Search" class="container">
+<div class="header">
+</div>
 <div id="search-form" class="row">
-    <div class="col-sm-12">
-        <h1>
-            Pick a song (electronic)
-        </h1>
-    </div>
     <div class="col-sm-offset-3 col-sm-6">
+        <h1 id="headline">
+            Pick an electronic song.
+        </h1>
         <input type="text" 
                 class="form-control form-group input-lg artist-input"  
                 id="track-input" 
@@ -29,22 +30,39 @@
     </div>
 </div>
 
-<div id='info' class="h1 text-center"></div>
-
-<div id = "search-results" class="container-fluid" ng-show="doneSearching">
+<div class="container-fluid" ng-show="loading" id="loader">
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
-           <div class="list-group row" ng-repeat="track in searchResults | limitTo:10" ng-click="analyzeTrack(track.permalink_url)"> 
+            <img src="/images/loader.gif">
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" ng-show="!loading && doneSearching">
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6" id="search-results">
+           <div class="list-group row" ng-repeat="track in searchResults | limitTo:8" ng-click="analyzeTrack(track.permalink_url)"> 
             <div class="col-sm-3">
             <img src="{{track.artwork_url}}" width="100">
             </div>
             <div class="col-sm-9">
-              {{track.title}}
+              <h3>{{track.title}}</h3>
             </div>
            </div>
         </div>
     </div>
 </div> 
+
+<pre ng-show="doneAnalyzing">{{analyzedResults}}</pre>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12" id="footer">
+            <strong id="name">Drop Switcher</strong> was created so you can "be your own DJ" (circa 2015 where popular DJs require no real beatmatch/transition skills..) and switch the drop at the peak of a song to another one. It uses the Echo Nest, Soundcloud, and remix.js APIs. Created for a Fullstack Academy hackathon week by Carolyn Yoo.
+        </div>
+    </div>
+</div>
+
 </div>
 
 
@@ -52,6 +70,6 @@
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="http://connect.soundcloud.com/sdk.js"></script>
-<script src="public/javascripts/searchController.js"></script>
+<script src="javascripts/searchController.js"></script>
 </body>
 </html>
