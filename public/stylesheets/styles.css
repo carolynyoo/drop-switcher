@@ -1,0 +1,51 @@
+* {
+  font-family: 'News Cycle', sans-serif;
+}
+
+.header {
+  background: url('../images/hero-img.jpeg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  opacity: 0.7;
+  min-height: 100%;
+  min-width: 1024px;
+
+  width: 100%;
+  height: auto;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#headline {
+  margin-bottom: 20px;
+}
+
+#loader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#loader img {
+  width: 100px;
+  height: 100px;
+}
+
+#search-results {
+  background: rgba(0,0,0,0.02);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+#footer {
+  background: rgba(0,0,0,0.02);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+#name {
+  text-transform: uppercase;
+}
