@@ -52,23 +52,27 @@ app.controller('Search', function($scope, SCAnalyzer) {
       var context = new contextFunction();
       // VCPXEMPPTK402WM6Y api key
       var remixer = createJRemixer(context, $, 'VCPXEMPPTK402WM6Y');
-      var player = remixer.getPlayer();
+      player = remixer.getPlayer();
       var trackURL = downloadURL + '?client_id=153f9d01d4fb3470daf72b370f2cfe62';
 
       remixer.remixTrack($scope.analyzedResults, trackURL, function (t, percent) {
         $scope.t = t;
         $scope.percent = percent;
-        if (t && parseInt(t.track.time_signature)!==4 || parseInt(t.track.tempo)!==128) {
-          $scope.tooGeneric = true;
-        } else {
-          if ($scope.track.status == 'ok') {
+        console.log(t);
+        $scope.$digest();
+        // if (t && (parseInt(t.analysis.track.time_signature)!==4 || parseInt(t.analysis.track.tempo)!==128)) {
+        //   $scope.tooGeneric = true;
+        //   $scope.$digest();
+        // } else {
+          if ($scope.t.status == 'ok') {
             $scope.dropBar = true;
-            $scope.remixed = [];
-            for (var i=0; i<$scope.track.bars.length; i++) {
-              $scope.remixed.push($scope.track.bars[i]);
+            remixed = [];
+            for (var i=0; i<$scope.t.analysis.bars.length; i++) {
+              remixed.push($scope.t.analysis.bars[i]);
             }
           }
-        }})
+        // }
+      })
 
     })
     .catch(function (err) {
@@ -85,7 +89,7 @@ app.factory('SCAnalyzer', function ($http) {
         url: url
       }
       return $http.post('/analyze', body).then(function (response) {
-        console.log(JSON.parse(response.data));
+        // console.log(JSON.parse(response.data));
         return JSON.parse(response.data);
       })
     }
