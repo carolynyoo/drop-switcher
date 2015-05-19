@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="container-fluid" ng-show="!loading && searching">
+<div class="container-fluid" ng-show="!loading && searching &&!doneAnalyzing">
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6" id="search-results">
            <div class="list-group row" ng-repeat="track in searchResults | limitTo:8" ng-click="analyzeTrack(track.permalink_url)"> 
@@ -53,11 +53,17 @@
     </div>
 </div> 
 
-<div ng-show="doneAnalyzing">
-<h3 ng-if="analyzedResults && (analyzedResults.track.time_signature!==4 || parseInt(analyzedResults.track.tempo)!==128)">Please pick a more generic EDM song (4/4 time signature)</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6" id="analysis-results">
+            <div ng-show="doneAnalyzing">
+            <h2>I'm analyzing. Please wait patiently for drop identifier below...</h2>
+            <h3 ng-show="tooGeneric">Oops! Please pick a more generic EDM song (4/4 time signature)</h3>
+            <h3 ng-show="dropBar">{{dropBar}}</h3>
+            </div>
+        </div>
+    </div>
 </div>
-
-<!-- <div ng-show="results">{{analyzedResults}}</div> -->
 
 <div class="container-fluid">
     <div class="row">
