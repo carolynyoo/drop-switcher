@@ -62,12 +62,12 @@ app.controller('Search', function($scope, SCAnalyzer) {
         $scope.$digest();
         // if (t && (parseInt(t.analysis.track.time_signature)!==4 || parseInt(t.analysis.track.tempo)!==128)) {
         //   $scope.tooGeneric = true;
-        //   $scope.$digest();
         // } else {
           if ($scope.t.status == 'ok') {
             $scope.dropBar = true;
             remixed = [];
-            for (var i=0; i<$scope.t.analysis.bars.length; i++) {
+            for (var i=parseInt($scope.t.analysis.bars.length/3); i<$scope.t.analysis.bars.length; i++) {
+              console.log(i);
               remixed.push($scope.t.analysis.bars[i]);
             }
           }
