@@ -38,6 +38,44 @@ app.controller('Search', function($scope, SCAnalyzer) {
     });
     $scope.doneAnalyzing = true;
   }
+
+  $scope.remixTrack = function (scURL, downloadURL) {
+    $scope.doneAnalyzing = true;
+
+    SCAnalyzer.analyze(scURL).then(function (data) {
+      $scope.analyzedResults = {
+      analysis: data,
+      status: "complete"
+      }
+
+      var contextFunction = window.AudioContext || window.webkitAudioContext;
+      var context = new contextFunction();
+      // VCPXEMPPTK402WM6Y api key
+      var remixer = createJRemixer(context, $, 'VCPXEMPPTK402WM6Y');
+      var player = remixer.getPlayer();
+      var trackURL = downloadURL + '?client_id=153f9d01d4fb3470daf72b370f2cfe62';
+
+      remixer.remixTrack($scope.analyzedResults, trackURL, function (t, percent) {
+        $scope.t = t;
+        $scope.percent = percent;
+        if (t && parseInt(t.track.time_signature)!==4 || parseInt(t.track.tempo)!==128) {
+          $scope.tooGeneric = true;
+        } else {
+          if ($scope.track.status == 'ok') {
+            $scope.dropBar = true;
+            $scope.remixed = [];
+            for (var i=0; i<$scope.track.bars.length; i++) {
+              $scope.remixed.push($scope.track.bars[i]);
+            }
+          }
+        }})
+
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+  }
+
 });
 
 app.factory('SCAnalyzer', function ($http) {

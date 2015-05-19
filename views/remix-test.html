@@ -41,7 +41,7 @@
 <div class="container-fluid" ng-show="!loading && searching &&!doneAnalyzing">
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6" id="search-results">
-           <div class="list-group row" ng-repeat="track in searchResults | limitTo:8" ng-click="remixTrack(track.permalink_url, track.stream_url)"> 
+           <div class="list-group row" ng-repeat="track in searchResults | limitTo:8" ng-click="remixTrack(track.permalink_url)"> 
             <div class="col-sm-3">
             <img src="{{track.artwork_url}}" width="100">
             </div>
@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6" id="analysis-results">
             <div ng-show="doneAnalyzing">
-            <h2>{{percent}}% loaded. Please wait patiently for drop identifier below...{{t}}</h2>
+            <h2>{{percent}}% loaded. Please wait patiently for drop identifier below...</h2>
             <h3 ng-show="tooGeneric">Oops! Please pick a more generic EDM song (4/4 time signature)</h3>
             <h3 ng-show="dropBar">{{dropBar}}</h3>
             </div>
@@ -78,10 +78,8 @@
 
 <!-- script time -->
 <script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/underscore/underscore.js"></script>
 <script src="http://connect.soundcloud.com/sdk.js"></script>
-<script src="javascripts/remix.js"></script>
 <script src="javascripts/searchController.js"></script>
 </body>
 </html>
