@@ -70,6 +70,7 @@ app.controller('Search', function($scope, SCAnalyzer) {
               console.log(i);
               remixed.push($scope.t.analysis.bars[i]);
             }
+            $scope.$digest();
           }
         // }
       })

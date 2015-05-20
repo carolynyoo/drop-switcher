@@ -59,10 +59,9 @@
             <div ng-show="doneAnalyzing">
             <h2>{{percent}}% loaded. Please wait patiently for drop identifier below...</h2>
             <h3 ng-show="tooGeneric">Oops! Please pick a more generic EDM song (4/4 time signature &amp; 128bpm)</h3>
-            <button onClick="player.play(0, remixed);">Play!</button>
-            <button onClick="player.stop()">Stop!</button>
             <h3 ng-show="dropBar">
-            {{dropBar}}
+            <button class="btn btn-default" onClick="player.play(0, remixed);">Play!</button>
+            <button class="btn btn-default" onClick="player.stop()">Stop!</button>
             </h3>
             </div>
         </div>
